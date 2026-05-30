@@ -4,6 +4,6 @@ output "keiba_db_backup_bucket" {
 }
 
 output "keiba_db_backup_bucket_arn" {
-  description = "ARB of the keiba-db backup bucket"
+  description = "ARN of the keiba-db backup bucket"
   value = aws_s3_bucket.keiba-db-backup.arn
 }

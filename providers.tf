@@ -3,8 +3,8 @@ provider "aws" {
 
   default_tags {
     tags = {
-    ManagedBy = "Terraform"
-    Repo      = "Kagayama0208/iac-aws"
+      ManagedBy = "Terraform"
+      Repo      = "Kagayama0208/iac-aws"
     }
   }
 }

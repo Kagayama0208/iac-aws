@@ -1,5 +1,6 @@
 resource "aws_s3_bucket" "keiba-db-backup" {
-  bucket = var.keiba_db_backup_bucket_name
+  bucket           = var.keiba_db_backup_bucket_name
+  bucket_namespace = "global"
 
   tags = {
     Project = "keiba-db"

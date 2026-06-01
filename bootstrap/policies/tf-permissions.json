@@ -1,0 +1,93 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "TerraformState",
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListBucket",
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:DeleteObject"
+      ],
+      "Resource": [
+        "arn:aws:s3:::kosuke-iac-tfstate",
+        "arn:aws:s3:::kosuke-iac-tfstate/*"
+      ]
+    },
+    {
+      "Sid": "TerraformLock",
+      "Effect": "Allow",
+      "Action": [
+        "dynamodb:GetItem",
+        "dynamodb:PutItem",
+        "dynamodb:DeleteItem"
+      ],
+      "Resource": "arn:aws:dynamodb:ap-northeast-1:ACCOUNT_ID_PLACEHOLDER:table/iac-aws-tflock"
+    },
+    {
+      "Sid": "ManageKeibaBuckets",
+      "Effect": "Allow",
+      "Action": ["s3:*"],
+      "Resource": [
+        "arn:aws:s3:::kosuke-keiba-db-backup-*",
+        "arn:aws:s3:::kosuke-keiba-db-backup-*/*"
+      ]
+    },
+    {
+      "Sid": "ManageKeibaKMS",
+      "Effect": "Allow",
+      "Action": [
+        "kms:CreateKey",
+        "kms:DescribeKey",
+        "kms:ListAliases",
+        "kms:CreateAlias",
+        "kms:DeleteAlias",
+        "kms:GetKeyRotationStatus",
+        "kms:EnableKeyRotation",
+        "kms:ScheduleKeyDeletion",
+        "kms:TagResource",
+        "kms:UntagResource",
+        "kms:ListResourceTags",
+        "kms:GetKeyPolicy",
+        "kms:PutKeyPolicy"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "ManageCnpgIAMUser",
+      "Effect": "Allow",
+      "Action": [
+        "iam:CreateUser",
+        "iam:DeleteUser",
+        "iam:GetUser",
+        "iam:TagUser",
+        "iam:UntagUser",
+        "iam:ListUserTags",
+        "iam:CreateAccessKey",
+        "iam:DeleteAccessKey",
+        "iam:ListAccessKeys",
+        "iam:PutUserPolicy",
+        "iam:DeleteUserPolicy",
+        "iam:GetUserPolicy"
+      ],
+      "Resource": "arn:aws:iam::ACCOUNT_ID_PLACEHOLDER:user/keiba-db-cnpg"
+    },
+    {
+      "Sid": "IAMRead",
+      "Effect": "Allow",
+      "Action": [
+        "iam:GetUser",
+        "iam:ListAccessKeys",
+        "iam:GetPolicy",
+        "iam:GetPolicyVersion",
+        "iam:GetRole",
+        "iam:GetRolePolicy",
+        "iam:ListRolePolicies",
+        "iam:ListAttachedRolePolicies",
+        "iam:GetOpenIDConnectProvider"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

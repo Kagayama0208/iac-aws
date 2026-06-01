@@ -60,6 +60,9 @@ jobs:
         with:
           terraform_version: ${{ env.TF_VERSION }}
       - run: terraform init
+      - name: Import existing S3 bucket if not in state
+        run: terraform import aws_s3_bucket.keiba-db-backup "${{ secrets.TF_VAR_keiba_db_backup_bucket_name }}" 2>/dev/null || true
+        continue-on-error: true
       - run: terraform validate
       - name: terraform plan
         id: plan
@@ -105,5 +108,8 @@ jobs:
         with:
           terraform_version: ${{ env.TF_VERSION }}
       - run: terraform init
+      - name: Import existing S3 bucket if not in state
+        run: terraform import aws_s3_bucket.keiba-db-backup "${{ secrets.TF_VAR_keiba_db_backup_bucket_name }}" 2>/dev/null || true
+        continue-on-error: true
       - run: terraform plan -no-color -input=false -out=tfplan
       - run: terraform apply tfplan

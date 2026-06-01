@@ -2,8 +2,8 @@ resource "aws_s3_bucket" "keiba-db-backup" {
   bucket = var.keiba_db_backup_bucket_name
 
   tags = {
-    Project      = "keiba-db"
-    Purpose      = "CNPG backup"
+    Project = "keiba-db"
+    Purpose = "CNPG backup"
   }
 }
 
@@ -49,5 +49,4 @@ resource "aws_s3_bucket_lifecycle_configuration" "keiba-db-backup" {
       days = 90
     }
   }
-  
 }

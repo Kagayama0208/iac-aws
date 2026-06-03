@@ -26,12 +26,14 @@
       "Resource": "arn:aws:dynamodb:ap-northeast-1:ACCOUNT_ID_PLACEHOLDER:table/iac-aws-tflock"
     },
     {
-      "Sid": "ManageKeibaBuckets",
+      "Sid": "ManageAppBuckets",
       "Effect": "Allow",
       "Action": ["s3:*"],
       "Resource": [
         "arn:aws:s3:::kosuke-keiba-db-backup-*",
-        "arn:aws:s3:::kosuke-keiba-db-backup-*/*"
+        "arn:aws:s3:::kosuke-keiba-db-backup-*/*",
+        "arn:aws:s3:::kosuke-personal-blog-images-*",
+        "arn:aws:s3:::kosuke-personal-blog-images-*/*"
       ]
     },
     {
@@ -55,7 +57,7 @@
       "Resource": "*"
     },
     {
-      "Sid": "ManageCnpgIAMUser",
+      "Sid": "ManageAppIAMUsers",
       "Effect": "Allow",
       "Action": [
         "iam:CreateUser",
@@ -69,9 +71,37 @@
         "iam:ListAccessKeys",
         "iam:PutUserPolicy",
         "iam:DeleteUserPolicy",
-        "iam:GetUserPolicy"
+        "iam:GetUserPolicy",
+        "iam:AttachUserPolicy",
+        "iam:DetachUserPolicy",
+        "iam:RemoveUserFromGroup",
+        "iam:DeleteLoginProfile"
       ],
-      "Resource": "arn:aws:iam::ACCOUNT_ID_PLACEHOLDER:user/keiba-db-cnpg"
+      "Resource": [
+        "arn:aws:iam::ACCOUNT_ID_PLACEHOLDER:user/keiba-db-cnpg",
+        "arn:aws:iam::ACCOUNT_ID_PLACEHOLDER:user/keiba-db-backup",
+        "arn:aws:iam::ACCOUNT_ID_PLACEHOLDER:user/personal-blog-images"
+      ]
+    },
+    {
+      "Sid": "ManageAppIAMPolicies",
+      "Effect": "Allow",
+      "Action": [
+        "iam:CreatePolicy",
+        "iam:DeletePolicy",
+        "iam:CreatePolicyVersion",
+        "iam:DeletePolicyVersion",
+        "iam:ListPolicyVersions",
+        "iam:GetPolicy",
+        "iam:GetPolicyVersion",
+        "iam:TagPolicy",
+        "iam:UntagPolicy",
+        "iam:ListPolicyTags"
+      ],
+      "Resource": [
+        "arn:aws:iam::ACCOUNT_ID_PLACEHOLDER:policy/keiba-db-backup",
+        "arn:aws:iam::ACCOUNT_ID_PLACEHOLDER:policy/personal-blog-images"
+      ]
     },
     {
       "Sid": "IAMRead",
@@ -85,7 +115,15 @@
         "iam:GetRolePolicy",
         "iam:ListRolePolicies",
         "iam:ListAttachedRolePolicies",
-        "iam:GetOpenIDConnectProvider"
+        "iam:GetOpenIDConnectProvider",
+        "iam:ListGroupsForUser",
+        "iam:ListUserPolicies",
+        "iam:ListAttachedUserPolicies",
+        "iam:ListSigningCertificates",
+        "iam:ListSSHPublicKeys",
+        "iam:ListServiceSpecificCredentials",
+        "iam:ListMFADevices",
+        "iam:GetLoginProfile"
       ],
       "Resource": "*"
     }

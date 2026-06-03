@@ -1,6 +1,7 @@
 # --- S3 bucket ---
 resource "aws_s3_bucket" "blog-images" {
-  bucket = var.blog_images_bucket_name
+  bucket           = var.blog_images_bucket_name
+  bucket_namespace = "account-regional"
 
   tags = {
     Project = "personal-blog"

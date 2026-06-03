@@ -13,13 +13,23 @@ output "keiba_db_backup_kms_key_arn" {
   value       = aws_kms_key.keiba-db-backup.arn
 }
 
-output "keiba_db_cnpg_access_key_id" {
-  description = "Access key ID for CNPG IAM user"
-  value       = aws_iam_access_key.keiba_db_cnpg.id
+output "blog_images_bucket" {
+  description = "S3 bucket for personal blog images"
+  value       = aws_s3_bucket.blog-images.id
 }
 
-output "keiba_db_cnpg_secret_access_key" {
-  description = "Secret access key for CNPG IAM user"
-  value       = aws_iam_access_key.keiba_db_cnpg.secret
+output "blog_images_bucket_arn" {
+  description = "ARN of the blog images bucket"
+  value       = aws_s3_bucket.blog-images.arn
+}
+
+output "blog_images_access_key_id" {
+  description = "Access key ID for the blog images IAM user"
+  value       = aws_iam_access_key.blog_images.id
+}
+
+output "blog_images_secret_access_key" {
+  description = "Secret access key for the blog images IAM user"
+  value       = aws_iam_access_key.blog_images.secret
   sensitive   = true
 }

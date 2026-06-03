@@ -50,6 +50,7 @@ jobs:
     needs: lint
     env:
       TF_VAR_keiba_db_backup_bucket_name: ${{ secrets.TF_VAR_keiba_db_backup_bucket_name }}
+      TF_VAR_blog_images_bucket_name: ${{ secrets.TF_VAR_blog_images_bucket_name }}
     steps:
       - uses: actions/checkout@v4
       - uses: aws-actions/configure-aws-credentials@v4
@@ -98,6 +99,7 @@ jobs:
     environment: production   # 任意: 承認ゲートを付けたい場合に利用
     env:
       TF_VAR_keiba_db_backup_bucket_name: ${{ secrets.TF_VAR_keiba_db_backup_bucket_name }}
+      TF_VAR_blog_images_bucket_name: ${{ secrets.TF_VAR_blog_images_bucket_name }}
     steps:
       - uses: actions/checkout@v4
       - uses: aws-actions/configure-aws-credentials@v4

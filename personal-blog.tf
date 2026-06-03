@@ -23,6 +23,8 @@ resource "aws_s3_bucket_public_access_block" "blog-images" {
   restrict_public_buckets = true
 }
 
+# 画像配信用途のため CMK は使わず SSE-S3(AES256)を採用。AWS-0132 を意図的に抑制。
+#trivy:ignore:AVD-AWS-0132
 resource "aws_s3_bucket_server_side_encryption_configuration" "blog-images" {
   bucket = aws_s3_bucket.blog-images.id
 

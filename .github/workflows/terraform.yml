@@ -71,10 +71,12 @@ jobs:
         continue-on-error: true
       - name: Comment plan on PR
         uses: actions/github-script@v7
+        env:
+          PLAN: ${{ steps.plan.outputs.stdout }}
         with:
           script: |
-            const output = `${{ steps.plan.outputs.stdout }}`;
-            const out = `#### Terraform Plan \`${{ steps.plan.outcome }}\`
+            const output = process.env.PLAN || 'No output';
+            const out = `#### Terraform Plan \`${process.env.PLAN || 'No output'}\`
             <details><summary>Show Plan</summary>
 
             \`\`\`

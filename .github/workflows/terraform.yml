@@ -14,7 +14,7 @@ permissions:
   pull-requests: write # PRコメント
 
 env:
-  TF_VERSION: "1.11.4" # >= 1.6.0 を満たす固定版
+  TF_VERSION: "1.11.4" # >= 1.11.4 を満たす固定版
   AWS_REGION: "ap-northeast-1"
 
 jobs:
@@ -61,9 +61,9 @@ jobs:
         with:
           terraform_version: ${{ env.TF_VERSION }}
       - run: terraform init
-      - name: Import existing S3 bucket if not in state
-        run: terraform import aws_s3_bucket.keiba-db-backup "${{ secrets.TF_VAR_keiba_db_backup_bucket_name }}" 2>/dev/null || true
-        continue-on-error: true
+      # - name: Import existing S3 bucket if not in state
+      #   run: terraform import aws_s3_bucket.keiba-db-backup "${{ secrets.TF_VAR_keiba_db_backup_bucket_name }}" 2>/dev/null || true
+      #   continue-on-error: true
       - run: terraform validate
       - name: terraform plan
         id: plan
@@ -110,8 +110,8 @@ jobs:
         with:
           terraform_version: ${{ env.TF_VERSION }}
       - run: terraform init
-      - name: Import existing S3 bucket if not in state
-        run: terraform import aws_s3_bucket.keiba-db-backup "${{ secrets.TF_VAR_keiba_db_backup_bucket_name }}" 2>/dev/null || true
-        continue-on-error: true
+      # - name: Import existing S3 bucket if not in state
+      #   run: terraform import aws_s3_bucket.keiba-db-backup "${{ secrets.TF_VAR_keiba_db_backup_bucket_name }}" 2>/dev/null || true
+      #   continue-on-error: true
       - run: terraform plan -no-color -input=false -out=tfplan
       - run: terraform apply tfplan

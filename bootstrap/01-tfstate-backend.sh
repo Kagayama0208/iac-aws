@@ -35,20 +35,20 @@ aws s3api put-bucket-encryption \
   --server-side-encryption-configuration \
     '{"Rules":[{"ApplyServerSideEncryptionByDefault":{"SSEAlgorithm":"AES256"}}]}'
 
-echo "==> Creating DynamoDB table for state locking: ${TABLE}"
-if aws dynamodb describe-table --table-name "${TABLE}" --region "${REGION}" >/dev/null 2>&1; then
-  echo "    Table already exists, skipping create."
-else
-  aws dynamodb create-table \
-    --table-name "${TABLE}" \
-    --attribute-definitions AttributeName=LockID,AttributeType=S \
-    --key-schema AttributeName=LockID,KeyType=HASH \
-    --billing-mode PAY_PER_REQUEST \
-    --region "${REGION}"
+# echo "==> Creating DynamoDB table for state locking: ${TABLE}"
+# if aws dynamodb describe-table --table-name "${TABLE}" --region "${REGION}" >/dev/null 2>&1; then
+#   echo "    Table already exists, skipping create."
+# else
+#   aws dynamodb create-table \
+#     --table-name "${TABLE}" \
+#     --attribute-definitions AttributeName=LockID,AttributeType=S \
+#     --key-schema AttributeName=LockID,KeyType=HASH \
+#     --billing-mode PAY_PER_REQUEST \
+#     --region "${REGION}"
 
-  echo "    Waiting for table to become ACTIVE..."
-  aws dynamodb wait table-exists --table-name "${TABLE}" --region "${REGION}"
-fi
+#   echo "    Waiting for table to become ACTIVE..."
+#   aws dynamodb wait table-exists --table-name "${TABLE}" --region "${REGION}"
+# fi
 
 echo "==> Done. Backend ready:"
 echo "    S3 bucket    : ${BUCKET}"

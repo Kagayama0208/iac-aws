@@ -3,7 +3,7 @@ terraform {
     bucket         = "kosuke-iac-tfstate"
     key            = "iac-aws/terraform.tfstate"
     region         = "ap-northeast-1"
-    dynamodb_table = "iac-aws-tflock"
+    # dynamodb_table = "iac-aws-tflock"
     encrypt        = true
     use_lockfile   = true
   }

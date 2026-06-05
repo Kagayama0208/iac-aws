@@ -1,4 +1,9 @@
 # --- S3 bucket ---
+
+import {
+  to = aws_s3_bucket.blog-images
+  id = var.blog_images_bucket_name
+}
 resource "aws_s3_bucket" "blog-images" {
   bucket           = var.blog_images_bucket_name
   bucket_namespace = "account-regional"
